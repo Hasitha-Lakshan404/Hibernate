@@ -32,11 +32,6 @@ public class AppInitializer {
         Orders order3 = new Orders("OR-003",customer2);
         Orders order4 = new Orders("OR-004",customer2);
 
-//        order1.setCustomer(customer1);
-//        order2.setCustomer(customer1);
-//        order3.setCustomer(customer2);
-//        order4.setCustomer(customer2);
-
         //OrderDetails
         OrderDetail orderDetail1 = new OrderDetail("OD-001", order1, item1, 15, item1.getUnitPrice());
         OrderDetail orderDetail2 = new OrderDetail("OD-002", order1, item1, 2, item1.getUnitPrice());
@@ -68,7 +63,7 @@ public class AppInitializer {
         session.delete(session.get(Customer.class,"C003"));
 
 
-        /**  Item   */
+        /** ==== Item ====  */
 
         //Create-Save
         session.save(item1);
@@ -87,7 +82,7 @@ public class AppInitializer {
         session.delete(session.get(Item.class,"I003"));
 
 
-        /**  ORDER  */
+        /** ===== ORDER ===== */
 
         //Save
         session.save(order1);
@@ -103,8 +98,7 @@ public class AppInitializer {
         session.delete(o1);
 
 
-
-        /**  ORDER DETAILS */
+        /** ===== ORDER DETAILS ==== */
 
         //Save
         session.save(orderDetail1);
@@ -125,7 +119,6 @@ public class AppInitializer {
         session.update(orderDetail3);
 
         session.delete(orderDetail5);
-
 
         transaction.commit();
         session.close();
