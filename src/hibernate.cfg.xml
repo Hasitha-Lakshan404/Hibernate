@@ -9,7 +9,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
     <!--will create a new database if not exists or use already having database-->
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_Test?createDatabaseIfNotExist=true</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/HibernateSuperMarket?createDatabaseIfNotExist=true</property>
 
     <!--your database username-->
     <property name="hibernate.connection.username">root</property>
