@@ -6,6 +6,8 @@ import lk.ijse.Supermarket.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.IOException;
+
 /**
  * @author : Hasitha Lakshan
  * Project :SuperMarket_WIth_Hibernate
@@ -14,7 +16,7 @@ import org.hibernate.Transaction;
  */
 
 public class AppInitializer {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //Customer
         Customer customer1 = new Customer("C001", "Hasitha", "Bandaragama", 60000);
@@ -27,10 +29,15 @@ public class AppInitializer {
         Item item3 = new Item("I003", "LUX", 180, 600);
 
         //Order
-        Orders order1 = new Orders("OR-001",customer1);
-        Orders order2 = new Orders("OR-002",customer1);
-        Orders order3 = new Orders("OR-003",customer2);
-        Orders order4 = new Orders("OR-004",customer2);
+        Orders order1 = new Orders("OR-001", customer1);
+        Orders order2 = new Orders("OR-002", customer1);
+        Orders order3 = new Orders("OR-003", customer2);
+        Orders order4 = new Orders("OR-004", customer2);
+
+        customer1.getOrderList().add(order1);
+        customer1.getOrderList().add(order2);
+        customer2.getOrderList().add(order3);
+        customer2.getOrderList().add(order4);
 
         //OrderDetails
         OrderDetail orderDetail1 = new OrderDetail("OD-001", order1, item1, 15, item1.getUnitPrice());
@@ -53,14 +60,14 @@ public class AppInitializer {
 
         //Read
         Customer c1 = session.get(Customer.class, "C003");
-        System.out.println(c1.getId()+" - "+c1.getName()+" - "+c1.getSalary()+" - "+c1.getAddress());
+        System.out.println(c1.getId() + " - " + c1.getName() + " - " + c1.getSalary() + " - " + c1.getAddress());
 
         //Update
         customer3.setAddress("LA");
         session.update(customer3);
 
         //Delete
-        session.delete(session.get(Customer.class,"C003"));
+        session.delete(session.get(Customer.class, "C003"));
 
 
         /** ==== Item ====  */
@@ -72,14 +79,14 @@ public class AppInitializer {
 
         //Read
         Item i1 = session.get(Item.class, "I003");
-        System.out.println(i1.getCode()+" - "+i1.getDescription()+" - "+i1.getUnitPrice()+" - "+i1.getQtyOnHand());
+        System.out.println(i1.getCode() + " - " + i1.getDescription() + " - " + i1.getUnitPrice() + " - " + i1.getQtyOnHand());
 
         //Update
         item1.setDescription("Baby-Soap");
         session.update(item1);
 
         //Delete
-        session.delete(session.get(Item.class,"I003"));
+        session.delete(session.get(Item.class, "I003"));
 
 
         /** ===== ORDER ===== */
@@ -92,7 +99,7 @@ public class AppInitializer {
 
         //Read
         Orders o1 = session.get(Orders.class, "OR-003");
-        System.out.println(o1.getId()+" - "+o1.getDate());
+        System.out.println(o1.getId() + " - " + o1.getDate());
 
         //Delete
         session.delete(o1);
@@ -112,7 +119,7 @@ public class AppInitializer {
 
         //Read
         OrderDetail orderDetail = session.get(OrderDetail.class, "OD-002");
-        System.out.println(orderDetail.getId()+" - "+orderDetail.getUnitPrice()+" - "+orderDetail.getQty());
+        System.out.println(orderDetail.getId() + " - " + orderDetail.getUnitPrice() + " - " + orderDetail.getQty());
 
         //Update
         orderDetail3.setUnitPrice(100);
@@ -122,5 +129,6 @@ public class AppInitializer {
 
         transaction.commit();
         session.close();
+
     }
 }

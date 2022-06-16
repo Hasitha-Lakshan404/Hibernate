@@ -33,6 +33,7 @@ public class OrderDetail  {
     }
 
     public OrderDetail() {
+
     }
 
     public String getId() {
