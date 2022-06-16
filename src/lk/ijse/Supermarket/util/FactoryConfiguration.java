@@ -31,6 +31,25 @@ public class FactoryConfiguration {
     private static FactoryConfiguration factoryConfiguration;
     private SessionFactory sessionFactory;
 
+
+    private FactoryConfiguration() throws IOException {
+        Configuration configuration = new Configuration();
+        Properties p = new Properties();
+        p.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate.properties"));
+        configuration.setProperties(p);
+        // configuration.addAnnotatedClass();
+        configuration.addAnnotatedClass(Customer.class);
+        configuration.addAnnotatedClass(Orders.class);
+        configuration.addAnnotatedClass(OrderDetail.class);
+        configuration.addAnnotatedClass(Item.class);
+
+        sessionFactory=configuration.buildSessionFactory();
+
+    }
+
+
+   /*
+   //===This is a Type of Property File configuration how not use hibernate.property class====//
    private FactoryConfiguration() {
        Map<String, String> properties = new HashMap<>();
        properties.put("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
@@ -50,7 +69,7 @@ public class FactoryConfiguration {
 
        Metadata metaData = metadataSources.buildMetadata();
        sessionFactory = metaData.buildSessionFactory();
-   }
+   }*/
 
     public static FactoryConfiguration getInstance() throws IOException {
         return (factoryConfiguration == null) ? factoryConfiguration=new FactoryConfiguration()
